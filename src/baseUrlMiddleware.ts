@@ -8,12 +8,12 @@ export const baseUrlMiddleware: (baseUrl: string) => HastPluginDefinition = (
     filter: ["a"],
     visit(node, ctx) {
       const href = node.properties.href;
-      if (typeof href === "string" && href.startsWith("http")) {
+      if (typeof href !== "string") return;
+
+      if (href.startsWith("http")) {
         ctx.setProperty(node, "target", "_blank");
         ctx.setProperty(node, "rel", "noopener noreferrer");
-      }
-
-      if (typeof href === "string" && href.endsWith(".md")) {
+      } else {
         ctx.setProperty(
           node,
           "href",

@@ -2,7 +2,7 @@ import { build } from "./build.ts";
 import browserSync from "browser-sync";
 import chokidar from "chokidar";
 
-build(false);
+build("/");
 
 const bsInstance = browserSync.create();
 
@@ -12,6 +12,6 @@ bsInstance.init({
 });
 
 chokidar.watch(["./content", "template.html", "style.css"]).on("change", () => {
-  build(false);
+  build("/");
   bsInstance.reload();
 });

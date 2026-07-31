@@ -3,10 +3,7 @@ import path from "path";
 import { markdownToHtml } from "satteri";
 import { baseUrlMiddleware } from "./baseUrlMiddleware.ts";
 
-const BASE_URL = "/notater/";
-
-export const build = (isProd: boolean) => {
-  const baseUrl = isProd ? BASE_URL : "/";
+export const build = (baseUrl: string) => {
   const template = fs.readFileSync("template.html", "utf-8");
   console.log("Bygger...");
   if (!fs.existsSync("dist")) fs.mkdirSync("dist");
@@ -20,7 +17,7 @@ export const build = (isProd: boolean) => {
   mdFiles.forEach(async (file) => {
     const markdown = fs.readFileSync(path.join("content", file), "utf-8");
     const htmlContent = await markdownToHtml(markdown, {
-      hastPlugins: [baseUrlMiddleware(isProd ? baseUrl : "")],
+      hastPlugins: [baseUrlMiddleware(baseUrl)],
     });
 
     const finalHtml = template

@@ -1,3 +1,3 @@
 import { build } from "./build.ts";
 
-build(true);
+build("/notater/");
