@@ -1,1 +1,0 @@
-Notater i zettelkast/evergreen sin ånd.
